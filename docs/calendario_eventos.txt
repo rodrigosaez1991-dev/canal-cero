@@ -1,0 +1,32 @@
+CALENDARIO DE EVENTOS Y CAMPAÑAS - PROYECTO CANAL CERO
+Cliente: Tienda Copec  |  Fecha doc: 2026-05-17
+Uso: variables de control / eventos para el MMM. Picos de venta no explicados
+por gasto suelen coincidir con estas fechas.
+
+================= EVENTOS COMERCIALES RECURRENTES (CHILE) =================
+- Enero: liquidaciones post-fiestas, vuelta gradual.
+- Marzo-Abril: "Mes del Libro", vuelta a clases, campañas AON de trafico.
+- Mayo: Dia de la Madre (2do domingo) - pico de venta.
+- Mayo: CyberDay (fines de mayo) - alto trafico y venta, fuerte inversion.
+- Junio: Dia del Padre (3er domingo).
+- Julio: vacaciones de invierno, liquidacion invierno.
+- Septiembre: Fiestas Patrias (18 sept) - pico de consumo en Chile.
+- Noviembre: Black Friday / CyberMonday - mayor pico anual de venta y de
+  inversion (Black Sale, Big Sale en el PDM).
+- Diciembre: Navidad - segundo gran pico, alta demanda.
+
+================= CAMPAÑAS TACTICAS OBSERVADAS EN EL PDM =================
+- AON (Always On): trafico y venta de base, mensual.
+- Big Sale / FINDE de Big Sale: empujes tacticos de fin de semana.
+- Black Sale / Black Friday: noviembre, proyeccion diaria dedicada.
+- Cupones flash: activaciones de 1 dia con presupuesto acotado.
+- Mes del Libro: abril, campaña tematica.
+
+================= COMO LO USA EL AGENTE =================
+Cuando el usuario pregunta por un pico o caida de venta en una fecha, el agente
+debe cruzar la fecha con este calendario antes de atribuirlo solo a medios. Ej:
+un alza de venta a fines de noviembre se explica en gran parte por Black Friday,
+no solo por mayor inversion; el MMM separa el efecto base-evento del efecto medios.
+
+NOTA: las fechas exactas (CyberDay, Black Friday) cambian cada año; el agente
+debe confirmar el calendario del año consultado y no asumir el del año anterior.

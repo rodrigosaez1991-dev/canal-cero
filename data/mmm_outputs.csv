@@ -1,0 +1,5 @@
+channel,roi_incremental,roi_low,roi_high,contribution_pct,saturation_usd_daily,run_date
+meta,4.20,3.10,5.30,0.28,1500,2026-05-15
+google,6.80,5.40,8.10,0.41,2200,2026-05-15
+tiktok,1.90,0.80,3.00,0.07,900,2026-05-15
+organic,0.00,0.00,0.00,0.24,0,2026-05-15

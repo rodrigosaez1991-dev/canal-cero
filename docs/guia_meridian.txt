@@ -1,0 +1,46 @@
+GUIA DE IMPLEMENTACION - MMM CON GOOGLE MERIDIAN / PyMC
+Proyecto Canal Cero  |  Cliente Tienda Copec  |  Fecha doc: 2026-05-17
+
+1. QUE ES MERIDIAN
+Meridian es la libreria open-source de Google para Marketing Mix Modeling
+bayesiano (sucesora de LightweightMMM). Corre sobre TensorFlow Probability.
+En Canal Cero se usa el mismo enfoque conceptual (adstock + saturacion +
+regresion bayesiana); el microservicio MMM puede implementarse con Meridian o
+con PyMC. La API HTTP del Worker MMM es agnostica a la libreria.
+
+2. INSUMOS QUE ESPERA EL MODELO
+- KPI (variable objetivo): venta diaria del ecommerce (sales_clp).
+- Media spend por canal y dia: meta_cost_usd, google_cost_usd, tiktok_cost_usd.
+- Opcional media metrics: impresiones o clics como exposicion alternativa.
+- Controles: variables de evento del calendario (Black Friday, CyberDay, etc.)
+  y estacionalidad (dia de semana, mes).
+Todos a granularidad diaria, alineados por fecha. Fuente: data/mmm_daily.csv.
+
+3. CONFIGURACION DE REFERENCIA
+- adstock: decay geometrico por canal, prior con media moderada.
+- saturacion: curva de Hill por canal.
+- priors de ROI: informativos por canal segun historico de la agencia.
+- muestreo: NUTS, ~2 cadenas, warmup adecuado; revisar r_hat < 1.1.
+
+4. RESUMEN DESCRIPTIVO REAL DEL DATASET (para sanity check)
+Periodo modelable con venta: 2023-01 a 2024-08 (604 dias con venta).
+Inversion total aproximada en el periodo de datos:
+  - Meta Ads:   ~ USD 404.000
+  - Google Ads: ~ USD 197.000
+Venta ecommerce acumulada en el periodo: ~ CLP 8.660 millones.
+Sesiones diarias promedio del sitio: ~ 38.000.
+(Estos valores son agregados crudos para validar ordenes de magnitud, NO son
+salidas del modelo. TikTok requiere normalizacion de escala antes de modelar.)
+
+5. SALIDAS Y COMO LEERLAS
+- ROI incremental por canal con intervalo de credibilidad.
+- Curva de respuesta por canal (donde satura).
+- Optimizacion de presupuesto: cuanto mover de un canal a otro para subir venta
+  manteniendo el gasto total.
+Regla practica: si el limite inferior del intervalo de ROI de un canal es < 1,
+ese canal no esta probando retorno positivo y es candidato a recortar.
+
+6. VALIDACION
+- Backtesting: comparar venta predicha vs real en un periodo hold-out.
+- R2 y MAPE sobre el hold-out.
+- Validacion causal externa: geo-lift / conversion lift cuando exista.

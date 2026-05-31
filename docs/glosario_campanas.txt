@@ -1,0 +1,40 @@
+GLOSARIO DE CAMPAÑAS Y METRICAS - PROYECTO CANAL CERO
+Cliente: Tienda Copec  |  Fecha doc: 2026-05-17
+Basado en el Plan de Medios (PDM) y estructura de campañas reales de Tienda Copec.
+
+================= METRICAS CLAVE =================
+ROAS (Return On Ad Spend): venta atribuida / inversion publicitaria. Meta
+  acordada con Copec = 10x minimo. Es metrica de PLATAFORMA, tiende a
+  sobre-atribuir porque cuenta conversiones por ultimo clic / view-through.
+ROI incremental (MMM): venta INCREMENTAL real generada por el canal por cada
+  peso invertido, estimada por el Marketing Mix Model. Es mas conservador y
+  el que se usa para reasignar presupuesto.
+CPA (Costo por Adquisicion): inversion / conversiones.
+CTR (Click Through Rate): clics / impresiones.
+Sesiones: visitas al sitio (Google Analytics). Copec mide "participacion de
+  sesiones" = sesiones de medios / sesiones totales del sitio.
+Participacion de ingresos: venta de medios / venta total del sitio.
+
+================= TIPOS DE CAMPAÑA (KPI) =================
+TRAFICO: objetivo llevar sesiones al sitio. Puja "Maximizar clic". No optimiza
+  venta directa; alimenta el funnel. Ej: Trafico_Tienda_Copec_AON.
+VENTA / CONVERSION: objetivo venta o valor. Puja "Maximizar valor + ROAS".
+  Ej: Search DSA, P/Max, Brand Exacto, Remarketing dinamico.
+AON (Always On): campañas permanentes de base, todo el mes, mantienen demanda.
+BIG SALE / BLACK SALE / BLACK FRIDAY: campañas tacticas de alta inversion en
+  fechas comerciales; disparan venta y tambien saturacion de canales.
+
+================= CANALES =================
+META (Meta Ads): Facebook e Instagram. Formatos Link Ads, Advantage+.
+  Segmentacion tipica: Lookalike de visitas web, intereses.
+GOOGLE (Google Ads): Search (marca y generico), Performance Max (P/Max),
+  Display, Remarketing, App. Suele traer el mayor valor de conversion.
+TIKTOK (TikTok Ads): alcance y video, parte alta del funnel.
+INFLUENCER: pauta con creadores, segmentacion abierta.
+ORGANICO (Facebook Page / SEO): alcance no pagado; variable base del MMM.
+
+================= ESTRUCTURA PDM =================
+El Plan de Medios (PDM) define por linea: KPI, Medio, Formato, Campaña,
+Estrategia de puja, Segmentacion, Fechas inicio/termino y Presupuesto (CLP).
+El cliente es "Tienda Copec", target tipico HM 18-55 años. El budget mensual
+de referencia del AON ronda los CLP 25.000.000.

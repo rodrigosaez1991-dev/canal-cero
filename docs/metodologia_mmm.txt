@@ -1,0 +1,50 @@
+METODOLOGIA MMM BAYESIANO - PROYECTO CANAL CERO
+Cliente: Tienda Copec  |  Fecha doc: 2026-05-17
+
+1. QUE ES MMM (MARKETING MIX MODELING)
+El MMM es una tecnica estadistica que estima la contribucion incremental de
+cada canal de medios sobre una variable de negocio (en Canal Cero: la venta
+diaria del ecommerce, "sales_clp"). A diferencia de la atribucion por ultimo
+clic de las plataformas, el MMM mira la serie de tiempo completa y separa el
+efecto de los medios del efecto de variables base (estacionalidad, precio,
+eventos). Es un modelo agregado y privacy-safe: no usa datos personales.
+
+2. POR QUE BAYESIANO
+Se usa un enfoque bayesiano (PyMC / Google Meridian) porque:
+- Permite incorporar priors informativos (ej. rangos razonables de ROI por
+  canal segun experiencia de la agencia) cuando hay pocos datos.
+- Entrega intervalos de credibilidad, no solo un punto: cada ROI viene con
+  incertidumbre, lo que es honesto para decisiones de presupuesto.
+- Maneja bien la colinealidad entre canales que suben juntos en campañas.
+
+3. TRANSFORMACIONES CLAVE
+a) ADSTOCK (efecto de arrastre): el impacto de un aviso no es solo el dia que
+   se muestra; decae en los dias siguientes. Se modela con un decay geometrico
+   por canal. Por eso hay venta atribuible a medios incluso en dias sin gasto.
+b) SATURACION (rendimientos decrecientes): duplicar el gasto NO duplica la
+   venta. Se modela con una curva de saturacion (Hill / logistica). El punto
+   donde la curva se aplana indica que el canal esta saturado y conviene mover
+   presupuesto a otro canal.
+
+4. SALIDAS DEL MODELO (tabla mmm_outputs)
+- roi_<canal>: retorno incremental por peso invertido en el canal.
+- contribucion_<canal>: % de la venta total explicado por el canal.
+- saturacion_<canal>: nivel de gasto donde el canal empieza a saturar.
+- budget_opt: reasignacion de presupuesto sugerida para maximizar venta.
+- run_date: fecha de ejecucion del modelo (para versionado).
+
+5. INTERPRETACION PARA EL CLIENTE
+Copec evalua el exito de una campaña por el CUMPLIMIENTO DE METAS del plan de
+medios (generacion de leads o ventas), no solo por metricas de plataforma. La
+meta de referencia acordada con Copec es un ROAS de al menos 10x. El MMM
+permite verificar si ese ROAS es incremental real o esta inflado por
+atribucion de plataforma. El agente debe distinguir siempre entre:
+- ROAS de plataforma (lo que reporta Meta/Google, suele sobre-atribuir), y
+- ROI incremental del MMM (efecto causal estimado, mas conservador y confiable).
+
+6. LIMITES Y BUENAS PRACTICAS
+- Un MMM necesita variacion en el gasto para estimar curvas; canales con gasto
+  casi constante tienen ROI mal identificado.
+- El modelo NO prueba causalidad por si solo; se valida con experimentos
+  (geo-lift / conversion lift) cuando es posible.
+- Re-entrenar al menos mensualmente con datos nuevos (run_date nuevo).

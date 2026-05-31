@@ -1,0 +1,53 @@
+DICCIONARIO DE DATOS - PROYECTO CANAL CERO
+Cliente: Tienda Copec  |  Fuente: Datos_para_MMM.xlsx  |  Fecha doc: 2026-05-17
+Periodo de datos: 2022-01-01 a 2024-10-03 (ventas hasta 2024-08-26)
+
+================================================================
+TABLA CONSOLIDADA: mmm_daily.csv (1.007 filas, granularidad diaria)
+================================================================
+Este archivo es la fuente unica para el Worker SQL y para el modelo MMM.
+Cada fila es un dia. Las columnas de inversion ("cost") se usan como
+variables de gasto por canal; "sales_clp" es la variable objetivo (KPI).
+
+CAMPO                  | DESCRIPCION                                    | UNIDAD
+-----------------------|------------------------------------------------|--------
+date                   | Fecha del registro (YYYY-MM-DD)                | fecha
+meta_cost_usd          | Inversion en Meta Ads (Facebook/Instagram)     | USD
+meta_impressions       | Impresiones servidas en Meta                   | conteo
+meta_clicks            | Clics totales en Meta                          | conteo
+meta_purchases         | Compras atribuidas en sitio web (Meta)         | conteo
+meta_conv_value        | Valor de conversiones web atribuido a Meta     | CLP*
+google_cost_usd        | Inversion en Google Ads                        | USD
+google_impressions     | Impresiones servidas en Google                 | conteo
+google_clicks          | Clics totales en Google                        | conteo
+google_conversions     | Conversiones atribuidas (Google)               | conteo
+google_conv_value      | Valor de conversiones atribuido a Google       | CLP*
+tiktok_cost_usd        | Inversion en TikTok Ads                        | USD**
+tiktok_impressions     | Impresiones servidas en TikTok                 | conteo
+tiktok_clicks          | Clics totales en TikTok                        | conteo
+tiktok_conversions     | Conversiones reportadas por TikTok             | conteo
+ga_sessions            | Sesiones del sitio (Google Analytics)          | conteo
+ga_ecom_purchases      | Compras ecommerce registradas en GA            | conteo
+sales_clp              | VENTA TOTAL del ecommerce (variable objetivo)  | CLP
+
+================================================================
+NOTAS DE CALIDAD DE DATOS (clave para interpretar resultados)
+================================================================
+*  meta_conv_value y google_conv_value vienen de plataformas distintas con
+   ventanas de atribucion distintas (1/7/28 dias). NO deben sumarse entre si
+   como ventas reales; "sales_clp" (ecommerce) es la fuente de verdad.
+** El costo de TikTok llega en una escala distinta a Meta/Google en el export
+   original; antes de modelar conviene normalizar a USD reales. El agente debe
+   advertir esta limitacion al hablar de inversion total cross-channel.
+-  Hay dias con costo en un canal y sin venta el mismo dia (campañas de
+   trafico/branding). Es esperado: el efecto de arrastre (adstock) lo modela
+   el MMM explicitamente.
+-  "sales_clp" tiene 604 dias con dato (2023-2024); para el MMM se usa el
+   periodo con cobertura completa de venta.
+
+RANGO POR FUENTE ORIGINAL
+- meta_ads:        2023-01-01 a 2024-08-22 (37.842 filas nivel ad)
+- google_ads_v2:   2022-01-01 a 2024-10-03 (68.076 filas nivel ad)
+- tiktok_ads:      2022-03-01 a 2024-10-03 (742 filas diarias)
+- sales_ecommerce: 2023-01-01 a 2024-08-26 (604 filas diarias)
+- ga_by_source:    2023-01-01 a 2024-08-21 (40.721 filas)
